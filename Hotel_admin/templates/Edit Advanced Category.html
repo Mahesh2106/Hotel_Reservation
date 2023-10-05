@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+{% extends 'Index_pg.html' %}
+{% block content %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HOTEL SECTIONS EDITTING</title>
+</head>
+<body>
+<div class="card-body">
+                    <h4 class="card-title">HOTEL EDIT PAGE</h4>
+                    <form class="forms-sample" action="{% url 'Update_Rooms' infoid=x.id %}" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+
+                      <div class="form-group">
+                        <label for="exampleInputEmail3">Room Name</label>
+                        <input type="text" class="form-control" id="exampleInputEmail3" placeholder="Category" name="Room" required value="{{x.Name}}">
+                      </div>
+
+                         <div class="form-group">
+                        <label for="exampleInputEmail3">Product Name</label>
+                        <select name="Pname" class="form-control">
+                          <option>{{x.Product}}</option>
+                          {% for i in y %}
+                          <option>{{i.Product}}</option>
+                          {% endfor %}
+                        </select>
+                      </div>
+
+
+                      <div class="form-group">
+                        <label for="exampleInputPassword4">Description</label>
+                        <input type="text" class="form-control" id="exampleInputPassword4" placeholder="Information" name="Room_des" required value="{{x.Description}}">
+                      </div>
+                        <div class="form-group">
+                        <label for="exampleInputPassword4">Price</label>
+                        <input type="text" class="form-control" placeholder="Price" name="Room_Price" required value="{{x.Price}}">
+                      </div>
+
+                      <div class="form-group">
+
+                        <div class="input-group col-xs-12">
+                          <img src="{{x.Image1.url}}" alt="" width="300px" height="300px">
+                          <input type="file" class="form-control file-upload-info" placeholder="Upload Image" name="Room_img1">
+
+
+                        </div>
+                      </div>
+                        <div class="form-group">
+
+                        <div class="input-group col-xs-12">
+                          <img src="{{x.Image2.url}}" alt="" width="300px" height="300px">
+                          <input type="file" class="form-control file-upload-info" placeholder="Upload Image" name="Room_img2">
+
+                        </div>
+                      </div>
+                        <div class="form-group">
+
+                        <div class="input-group col-xs-12">
+                          <img src="{{x.Image3.url}}" alt="" width="300px" height="300px">
+                          <input type="file" class="form-control file-upload-info" placeholder="Upload Image" name="Room_img3">
+
+                        </div>
+                      </div>
+
+                      <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                      <button class="btn btn-dark">Cancel</button>
+                    </form>
+                  </div>
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    {% if messages %}
+      {% for i in messages %}
+           {% if i.tags == 'warning' %}
+               <script>
+                    swal('{{i}}','','warning');
+               </script>
+           {% elif i.tags == 'error' %}
+               <script>
+                    swal('{{i}}','','error');
+               </script>
+           {% else %}
+               <script>
+                    swal('{{i}}','','success');
+               </script>
+           {% endif %}
+        {% endfor %}
+    {% endif %}
+
+
+<style>
+    input[type=file]::file-selector-button {
+  margin-right: 20px;
+  border: none;
+  background: #084cdf;
+  padding: 10px 20px;
+  border-radius: 10px;
+  color: #fff;
+  cursor: pointer;
+  transition: background .2s ease-in-out;
+}
+
+input[type=file]::file-selector-button:hover {
+  background: #0d45a5;
+}
+
+</style>
+</body>
+</html>
+{% endblock %}

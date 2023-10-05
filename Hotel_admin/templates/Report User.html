@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+{% extends 'Index_pg.html' %}
+{% block content %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="{% url 'update_User_field' infoid=x.Customer_id %}" method="post">
+  {% csrf_token %}
+  <div class="form-group">
+      <label>Customer Name</label>
+      <input type="text" value="{{x.Customer_Name}}" class="form-control" name="cus"><br>
+      <label>Email</label>
+      <input type="text" value="{{x.Email}}" class="form-control" name="em"><br>
+      <label>Proof Id</label>
+      <input type="text" value="{{x.Proof_Id}}" class="form-control" name="Id"><br>
+      <label>Proof Type</label>
+      <input type="text" value="{{x.Proof_Type}}" class="form-control" name="ProType"><br>
+      <label>Proof</label><br>
+      <a href="{{ x.Proof_Image.url }}" target="_blank" onclick="openPDF('{{ x.Proof_Image.url }}'); return false;" name="Img">{{ x.Proof_Image }}</a><br>
+      <textarea type="text" name="txt" placeholder="Send Remarks" class="form-control"></textarea><br>
+      <button type="submit" class="btn btn-success">Reply</button>
+  </div>
+</form>
+<script src="https://mozilla.github.io/pdf.js/build/pdf.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script>
+    function openPDF(url) {
+  window.open(url, '_blank');
+}
+</script>
+
+
+    {% if messages %}
+      {% for i in messages %}
+           {% if i.tags == 'warning' %}
+               <script>
+                    swal('{{i}}','','warning');
+               </script>
+           {% elif i.tags == 'error' %}
+               <script>
+                    swal('{{i}}','','error');
+               </script>
+           {% else %}
+               <script>
+                    swal('{{i}}','','success');
+               </script>
+           {% endif %}
+        {% endfor %}
+    {% endif %}
+
+</body>
+</html>
+{% endblock %}

@@ -1,0 +1,891 @@
+<!doctype html>
+{% load static %}
+<html class="no-js" lang="zxx">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Continental Resort</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- <link rel="manifest" href="site.webmanifest"> -->
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'img/favicon.png' %}">
+    <!-- Place favicon.ico in the root directory -->
+
+    <!-- CSS here -->
+
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
+    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/themify-icons.css' %}">
+    <link rel="stylesheet" href="{% static 'css/nice-select.css' %}">
+    <link rel="stylesheet" href="{% static 'css/flaticon.css' %}">
+    <link rel="stylesheet" href="{% static 'css/gijgo.css' %}">
+    <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+    <link rel="stylesheet" href="{% static 'css/slicknav.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+<!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="css/responsive.css"> -->
+
+</head>
+
+<body>
+    <!--[if lte IE 9]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+        <![endif]-->
+
+    <!-- header-start -->
+    <header>
+        <div class="header-area ">
+            <div id="sticky-header" class="main-header-area">
+                <div class="container-fluid p-0">
+                    <div class="row align-items-center no-gutters">
+                        <div class="col-xl-6 col-lg-6">
+                            <div class="main-menu  d-none d-lg-block">
+                                <nav>
+                                    <ul id="navigation">
+                                        <li><a href="{% url 'Home_pg' %}">Home</a></li>
+                                        <li><a href="{% url 'About_pg' %}">About</a></li>
+                                         <li><a href="#">Services<i></i></a>
+                                            <ul class="submenu">
+                                                 {% for d in x %}
+                                                <li><a href="{% url 'Services_page' cat=d.Category %}">{{d.Category}}</a></li>
+                                            {% endfor %}
+                                            </ul>
+                                        </li>
+
+                                        <li><a href="{% url 'Contact_pg' %}">Contact</a></li>
+                                        <li><a href="{% url 'Profile_Pg' %}">Profile</a></li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                        <div class="col-xl-2 col-lg-2">
+                            <div class="logo-img">
+                                <a href="{% url 'Home_pg' %}">
+                                    <img src="https://www.hotel-continental.at/wp-content/uploads/sites/128/2020/07/CONTINENTAL001.png" alt="" width="220px">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-xl-4 col-lg-4 d-none d-lg-block">
+                            <div class="book_room">
+                                <div class="socail_links">
+                                    <ul>
+                                      <li>{% if request.session.Email %}
+                                            <a href="#">
+                                               <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="currentColor" class="bi bi-chat-left-fill" viewBox="0 0 16 16">
+  <path d="M2 0a2 2 0 0 0-2 2v12.793a.5.5 0 0 0 .854.353l2.853-2.853A1 1 0 0 1 4.414 12H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+</svg>
+                                            </a>
+                                             {% endif %}
+                                        </li>
+
+                                    </ul>
+                                </div>
+                                <div class="book_btn d-none d-lg-block">
+                                    {% if request.session.Email %}
+                                   <form action="{% url 'Booking_page' %}">
+                                    <button type="submit" class="btn btn-outline-warning">Check Availability</button>
+
+                                        </form>
+                                    <form action="{% url 'Logout_Pg' %}">
+                                        <button style="margin-top:-65px;margin-left:170px;" class="btn btn-outline-danger">Logout</button>
+                                    </form>
+
+
+                                        {% else %}
+                                    <form action="{% url 'Registration_pg' %}">
+                                        <button type="submit" class="btn btn-outline-warning">Register</button>
+                                        </form>
+                                    {% endif %}
+
+                                    <!--
+
+                                        <a class="popup-with-form" href="#test-form">Book A Room</a>-->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="mobile_menu d-block d-lg-none"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- header-end -->
+
+    <!-- bradcam_area_start -->
+    <div class="bradcam_area breadcam_bg" style="background-image:url(https://images7.alphacoders.com/877/877723.jpg);">
+        <h3>Room Availability Checks</h3>
+    </div>
+    <!-- bradcam_area_end -->
+
+
+<div class="twelve" style="text-align:center;margin-top:40px;">
+  <h1>Book Rooms Along With Class</h1>
+</div>
+    <div class="table-responsive" style="margin-top:50px;">
+  <div class="search-container">
+    <input type="text" placeholder="Search" class="search-input" id="searchInput">
+    <button type="submit" class="search-button"><i class="fa fa-search"></i></button>
+  </div>
+
+  <br>
+
+  <table class="table table-striped" id="roomTable">
+    <thead>
+      <tr>
+        <th>Room Number</th>
+        <th>Room Type</th>
+        <th>Category(AC/NON-AC)</th>
+        <th>Image</th>
+        <th>Price</th>
+        <th>Book Now</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for i in z %}
+      <tr>
+        <td>{{ i.Room_Num }}</td>
+        <td>{{ i.Room_Type }}</td>
+        <td>{{ i.Category }}</td>
+        <td class="py-1"><img class="im" src="{{ i.Room_Image.url }}" alt="image" width="150px" height="150px"></td>
+        <td>{{ i.Price }}</td>
+        <td>
+          <form action="#">
+            <button onclick="openModal('{{i.Room_Num}}', {{i.Price}})" class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#staticBackdrop" type="button">Check Availability</button>
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+
+
+
+
+
+<!-- Modal -->
+<div class="modal fade mm" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+      <form action="{% url 'Booking_save' %}" method="post">
+          {% csrf_token %}
+          <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel" style="color: rgb(6, 223, 239);font-weight:bolder;">Room Booking</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+            <a style="color:red;text-decoration:none;font-size:22px;font-weight:bolder;">
+            <span>All Check-In and Check-outs will be calculated on 24hrs</span><br>
+            </a>
+            <hr>
+ <input type="hidden" name="email" id="user_email">
+
+                <label style="font-weight:bolder;font-size:19px;color:#ED6201 ;">Check-In Date</label>
+            <input type="date" class="form-control" name="start_date" id="startdate" required>
+
+            <label style="font-weight:bolder;font-size:19px;color:#ED6201 ;">Check-In Time</label>
+            <input type="time" class="form-control" name="start_Time" id="starttime" required>
+
+            <label style="font-weight:bolder;font-size:19px;color:#ED6201 ;">Check-Out Date</label>
+            <input type="date" class="form-control" name="end_date" id="enddate" required>
+
+             <label style="font-weight:bolder;font-size:19px;color:#ED6201 ;">Check-Out Time</label>
+            <input type="time" class="form-control" name="End_Time" id="endtime" required>
+
+            <label style="font-weight:bolder;font-size:19px;color:#ED6201 ;">Room Number</label>
+            <input type="text" class="form-control" name="Room_Num" id="RooNum" readonly>
+
+            <label style="font-weight:bolder;font-size:19px;color:#ED6201 ;">Price</label>
+            <input type="text" class="form-control" name="Price" id="Price" readonly>
+
+            <label style="font-weight:bolder;font-size:19px;color:#A2ED01  ;">Total Price(For Room/Days)</label>
+            <input type="text" class="form-control" name="Total_Price" id="amount" min="0" readonly>
+
+
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-warning">Book</button>
+      </div>
+    </div>
+      </form>
+
+  </div>
+</div>
+
+
+<!--    <h1 style="text-align:center;font-weight:bolder">Refreshment Booking (PN : Please set to Zero if not taken particular)</h1>-->
+
+<!--    <div class="table-responsive" style="height:900px;">-->
+<!--    <form action="" method="post">-->
+<!--        {% csrf_token %}-->
+<!--        <table class="table table-striped">-->
+<!--            <thead>-->
+<!--                <tr>-->
+<!--                    <th>Item Id</th>-->
+<!--                    <th>Type</th>-->
+<!--                    <th>Name</th>-->
+
+<!--                    <th>Picture</th>-->
+<!--                    <th>Price /piece</th>-->
+<!--                    <th>Session</th>-->
+<!--                    <th>Total/</th>-->
+<!--                </tr>-->
+<!--            </thead>-->
+<!--            <tbody>-->
+<!--            -->
+<!--                {% for i in y %}-->
+<!--                    <tr>-->
+<!--                        <td>{{i.Item_Id}}<input type="hidden" value="{{i.Item_Id}}" name="ItemId"></td>-->
+<!--                        <td>{{i.Item_Type}}</td>-->
+<!--                        <td>{{i.Item_Name}}<input type="hidden" value="{{i.Item_Name}}" name="Item_Name"></td>-->
+
+<!--                        <td class="py-1"><img src="{{i.Item_Image.url}}" alt="image" width="150px" height="150px"></td>-->
+<!--                        <td>-->
+<!--                            {{i.Item_Price}}-->
+<!--                            <input type="hidden" class="price" id="fund" value="{{i.Item_Price}}">-->
+<!--                            <input type="number" name="num" class="qty" placeholder="Add" id="qty" min="0" style="width:60px">-->
+<!--                        </td>-->
+<!--                        <td>-->
+<!--                            <select name="session" style="border-radius:16px;">-->
+<!--                                <option>Breakfast</option>-->
+<!--                                <option>Lunch</option>-->
+<!--                                <option>Evening</option>-->
+<!--                                <option>Dinner</option>-->
+<!--                            </select>-->
+<!--                        </td>-->
+<!--                        <td><input style="border-radius:20px;border:none;" type="text" placeholder="Total Price" name="Total_Bev" id="Total_Bev"></td>-->
+<!--                    </tr>-->
+<!--                {% endfor %}-->
+<!--            </tbody>-->
+<!--            <tfoot>-->
+<!--                <tr>-->
+<!--                    <th colspan="">Total Price:</th>-->
+<!--                    <td><input style="border-radius:15px;" name="GrandRefreshment" type="text" id="grandTotal" readonly></td>-->
+<!--                </tr>-->
+<!--            </tfoot>-->
+<!--        </table>-->
+<!--        <button style="" type="submit" class="btn btn-primary">Order</button>-->
+<!--    </form>-->
+<!--</div>-->
+
+
+        <div class="col-12">
+                        <h2 class="contact-title">Share Your Review</h2>
+                    </div>
+                    <div class="col-lg-8">
+    <form class="form-contact contact_form" action="{% url 'Rating_desk' %}" method="post" >
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-8">
+                <div class="form-group">
+                    <textarea class="form-control w-100" name="message" id="message" cols="20" rows="7" placeholder="Share Your Review"></textarea>
+                </div>
+            </div>
+        </div>
+        <input type="hidden" name="cus" value="{{pro.Customer_Name }}">
+
+        <div class="rating">
+            <span class="fa fa-star" onclick="rate(1)"></span>
+            <span class="fa fa-star" onclick="rate(2)"></span>
+            <span class="fa fa-star" onclick="rate(3)"></span>
+            <span class="fa fa-star" onclick="rate(4)"></span>
+            <span class="fa fa-star" onclick="rate(5)"></span>
+        </div>
+
+        <input type="hidden" name="rating" id="rating-input" value="">
+
+        {% if form.errors %}
+            <div class="alert alert-danger">
+                {% for field in form %}
+                    {% for error in field.errors %}
+                        {{ error }}
+                    {% endfor %}
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <div class="form-group mt-3">
+            <button type="submit" class="btn btn-outline-warning">Submit</button>
+        </div>
+    </form>
+</div>
+
+
+    <div style="border-color: rgb(123, 123, 123); width: 400px;margin-left: 75%;margin-top: -280px;">
+    <div><h1 style="">Total</h1><hr>
+  <label><h3>Total Amount : </h3></label>
+        <h2><span>Rs {{total}}</span></h2>
+
+        <hr>
+
+    </div>
+    <hr>
+
+
+        <button type="submit" class="btn btn-outline-warning" id="bt" data-toggle="modal" data-target="#paymentModal">Proceed To Pay</button>
+
+
+</div>
+
+<div class="modal fade" id="paymentModal" tabindex="-1" role="dialog" aria-labelledby="paymentModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="paymentModalLabel" style="font-weight:bolder;color:white;">PAYMENT DETAILS</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form class="form-contact contact_form" action="{% url 'Payment_save' %}" method="post" id="contactForm" novalidate="novalidate">
+          {% csrf_token %}
+            <div class="container-fluid">
+            <div class="row d-flex justify-content-center">
+              <div class="col-sm-12">
+                <div class="card mx-auto">
+                  <div class="form-group mb-0">
+                    <p class="text-warning mb-0">Card Number</p>
+                    <input type="text" name="card_num" placeholder="1234 5678 9012 3457"  id="cno" minlength="16" maxlength="16" required>
+                    <img src="https://img.icons8.com/color/48/000000/visa.png" width="64px" height="60px" />
+                  </div>
+
+
+                  <div class="form-group">
+                    <p class="text-warning mb-0">Cardholder's Name</p>
+                    <input type="text" name="name" placeholder="Name" size="17" required>
+                  </div>
+                  <div class="form-group">
+                    <p class="text-warning mb-0">Amount</p>
+                    <input type="text" name="Amt" value="" size="17" readonly>
+                  </div>
+                  <div class="form-group pt-2">
+                    <div class="row d-flex">
+                      <div class="col-sm-4">
+                        <p class="text-warning mb-0">Expiration</p>
+                        <input type="month" name="exp" placeholder="MM/YYYY" size="7" id="exp" required>
+                      </div>
+                      <div class="col-sm-3">
+                        <p class="text-warning mb-0">Cvv</p>
+                        <input type="password" name="cvv" placeholder="&#9679;&#9679;&#9679;" size="1" minlength="3" maxlength="3" required>
+                      </div>
+                      <div class="col-sm-5 pt-0">
+                        <button type="submit" class="btn btn-outline-warning bt"><i class="fas fa-arrow-right px-3 py-2">Pay</i></button>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <!-- footer -->
+    <footer class="footer" >
+        <div class="footer_top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-3 col-md-6 col-lg-3">
+                        <div class="footer_widget">
+                            <h3 class="footer_title">
+                                address
+                            </h3>
+                            <p class="footer_text" >  200, Green road, Mongla, <br>
+                                    New Yor City USA</p>
+
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-6 col-lg-3">
+                        <div class="footer_widget">
+                            <h3 class="footer_title">
+                                    Reservation
+                            </h3>
+                            <p class="footer_text" >+91 789 254 6785<br>
+                                    reservation@continent.com</p>
+                        </div>
+                    </div>
+                    <div class="col-xl-2 col-md-6 col-lg-2">
+                        <div class="footer_widget">
+                            <h3 class="footer_title">
+                                    Navigation
+                            </h3>
+                            <ul>
+                                <li><a href="{% url 'Home_pg' %}">Home</a></li>
+                                <li><a href="{% url 'About_pg' %}">About</a></li>
+                                <li><a href="{% url 'Contact_pg' %}">Contact</a></li>
+                                <li><a href="{% url 'Profile_Pg' %}">Profile</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-md-6 col-lg-4">
+                        <div class="footer_widget">
+                            <h3 class="footer_title">
+                                Newsletter
+                            </h3>
+                            <form action="{% url 'Newsletter_save' %}" class="newsletter_form" method="post">
+                                {% csrf_token %}
+                                <input type="email" placeholder="Enter your mail" name="NewsLetter">
+                                <button type="submit">Sign Up</button>
+                            </form>
+                            <p class="newsletter_text">Subscribe newsletter to get updates</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="copy-right_text">
+            <div class="container">
+                <div class="footer_border"></div>
+                <div class="row">
+                    <div class="col-xl-8 col-md-7 col-lg-9">
+                        <p class="copy_right">
+                                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Mahesh M</a>
+<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        </p>
+                    </div>
+                    <div class="col-xl-4 col-md-5 col-lg-3">
+                        <div class="socail_links">
+                            <ul>
+                                <li>
+                                    <a href="#">
+                                        <i class="fa fa-facebook-square"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="fa fa-twitter"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="fa fa-instagram"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- footer_end -->
+
+
+
+
+    <!-- JS here -->
+
+    <script src="{% static 'js/vendor/modernizr-3.5.0.min.js' %}"></script>
+    <script src="{% static 'js/vendor/jquery-1.12.4.min.js' %}"></script>
+    <script src="{% static 'js/popper.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'js/isotope.pkgd.min.js' %}"></script>
+    <script src="{% static 'js/ajax-form.js' %}"></script>
+    <script src="{% static 'js/waypoints.min.js' %}"></script>
+    <script src="{% static 'js/jquery.counterup.min.js' %}"></script>
+    <script src="{% static 'js/imagesloaded.pkgd.min.js' %}"></script>
+    <script src="{% static 'js/scrollIt.js' %}"></script>
+    <script src="{% static 'js/jquery.scrollUp.min.js' %}"></script>
+    <script src="{% static 'js/wow.min.js' %}"></script>
+    <script src="{% static 'js/nice-select.min.js' %}"></script>
+    <script src="{% static 'js/jquery.slicknav.min.js' %}"></script>
+    <script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
+    <script src="{% static 'js/plugins.js' %}"></script>
+    <script src="{% static 'js/gijgo.min.js' %}"></script>
+
+    <!--contact js-->
+    <script src="{% static 'js/contact.js' %}"></script>
+    <script src="{% static 'js/jquery.ajaxchimp.min.js' %}"></script>
+    <script src="{% static 'js/jquery.form.js' %}"></script>
+    <script src="{% static 'js/jquery.validate.min.js' %}"></script>
+    <script src="{% static 'js/mail-script.js' %}"></script>
+
+    <script src="{% static 'js/main.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+
+
+    <script>
+  $(document).ready(function() {
+    var totalAmount = $("h2 span").text();
+    $('#paymentModal input[name="Amt"]').val(totalAmount);
+  });
+</script>
+
+
+
+    {% if messages %}
+      {% for i in messages %}
+           {% if i.tags == 'warning' %}
+               <script>
+                    swal('{{i}}','','warning');
+               </script>
+           {% elif i.tags == 'error' %}
+               <script>
+                    swal('{{i}}','','error');
+               </script>
+           {% else %}
+               <script>
+                    swal('{{i}}','','success');
+               </script>
+           {% endif %}
+        {% endfor %}
+    {% endif %}
+
+    <script>
+        $(document).ready(function(){
+            $(".bt").click(function(){
+                $(".contactForm").slideDown(3000)
+            })
+        })
+    </script>
+
+
+<script>
+$(document).ready(function() {
+  // Handle star rating clicks
+  $('.rating > span').on('click', function() {
+    var rating = $(this).index() + 1; // Get the selected rating (1 to 5)
+
+    // Remove "checked" class from stars if clicked again
+    if ($(this).hasClass('checked')) {
+      $(this).removeClass('checked');
+      $(this).nextAll().removeClass('checked');
+      $('#rating-input').val(''); // Reset the input field when deselected
+    } else {
+      // Highlight the selected stars
+      $(this).addClass('checked');
+      $(this).prevAll().addClass('checked');
+      $(this).nextAll().removeClass('checked');
+      $('#rating-input').val(rating); // Update the input field with selected rating
+    }
+
+    // Send AJAX request to save rating
+    $.ajax({
+      url: 'save_rating.php', // Replace with actual server-side script URL
+      type: 'POST',
+      data: { rating: rating }, // Send the rating as a POST parameter
+      success: function(response) {
+        console.log('Rating saved successfully.');
+      },
+      error: function(xhr, status, error) {
+        console.error('Error saving rating:', error);
+      }
+    });
+  });
+});
+</script>
+
+
+
+
+<script>
+  $(function() {
+  // Get the input field and table
+  var input = $('#searchInput');
+  var table = $('#roomTable');
+
+  // Add an event listener to the input field
+  input.on('keyup', function() {
+    // Get the search query from the input field
+    var query = input.val().toLowerCase();
+
+    // Filter the rows of the table based on the search query
+    table.find('tbody tr').each(function() {
+      var row = $(this);
+      var category = row.find('td:eq(2)').text().toLowerCase();
+      var roomType = row.find('td:eq(1)').text().toLowerCase();
+
+      switch(category) {
+        case "ac":
+          if (roomType.indexOf(query) != -1) {
+            row.show();
+          } else {
+            row.hide();
+          }
+          break;
+        case "non-ac":
+          if (roomType.indexOf(query) != -1) {
+            row.show();
+          } else {
+            row.hide();
+          }
+          break;
+        default:
+          if (category.indexOf(query) != -1) {
+            row.show();
+          } else {
+            row.hide();
+          }
+      }
+    });
+  });
+});
+</script>
+
+<script>
+     function calculateNumberOfDays(startDate, endDate) {
+    var start = new Date(startDate);
+    var end = new Date(endDate);
+    var diff = end.getTime() - start.getTime();
+    var days = diff / (1000 * 60 * 60 * 24);
+    return days;
+  }
+
+  function updateAmount() {
+    var startDate = $('#startdate').val();
+    var endDate = $('#enddate').val();
+    var numOfDays = calculateNumberOfDays(startDate, endDate);
+    var price = $('#Price').val();
+
+    if (isNaN(price)) {
+      $('#amount').val('Invalid price');
+    } else {
+      var newAmount = price * numOfDays;
+      $('#amount').val(newAmount.toFixed(2));
+    }
+  }
+
+  // Attach event listener to date inputs
+  $('#startdate, #enddate').on('change', updateAmount);
+
+  // Attach event listener to price input
+  $('#Price').on('keyup', updateAmount);
+
+  // Initialize total price as 0
+  $('#amount').val(0);
+
+</script>
+
+
+<script>
+
+  $(document).ready(function(){
+    $(".qty").on("change", function(){
+      var qty = $(this).val();
+      var price = $(this).siblings(".price").val();
+      var total = qty * price;
+      $(this).parent().siblings("td").children("#Total_Bev").val(total);
+      var grandTotal = 0;
+      $(".qty").each(function(){
+        grandTotal += ($(this).val() * $(this).siblings(".price").val());
+      });
+      $("#grandTotal").val(grandTotal);
+    });
+  });
+
+
+</script>
+
+
+
+
+
+
+    <script>
+   function openModal(roomNum, price) {
+
+  const modal = document.getElementById('staticBackdrop');
+  const roomNumInput = document.getElementById('RooNum');
+  const priceInput = document.getElementById('Price');
+
+
+  roomNumInput.value = roomNum;
+  priceInput.value = price;
+
+
+  $(modal).modal('show');
+}
+    </script>
+
+
+
+
+    <script>
+  // Fetch the email ID of the logged-in user
+  var userEmail = "{{ request.session.Email }}";
+
+  // Set the value of the hidden input field to the email ID
+  document.getElementById("user_email").value = userEmail;
+</script>
+
+
+    <style>
+
+
+
+.card{
+	border: none;
+	max-width: 450px;
+	border-radius: 15px;
+	margin: 150px 0 150px;
+	padding: 35px;
+	padding-bottom: 20px!important;
+}
+.heading{
+	color: #C1C1C1;
+	font-size: 14px;
+	font-weight: 500;
+}
+<!--img{-->
+<!--	transform: translate(160px,-10px);-->
+<!--}-->
+<!--img:hover{-->
+<!--    cursor: pointer;-->
+}
+.text-warning{
+	font-size: 12px;
+	font-weight: 500;
+	color: #edb537!important;
+}
+#cno{
+	transform: translateY(-10px);
+}
+input{
+	border-bottom: 1.5px solid #E8E5D2!important;
+	font-weight: bold;
+	border-radius: 0;
+	border: 0;
+
+}
+.form-group input:focus{
+	border: 0;
+	outline: 0;
+}
+.col-sm-5{
+	padding-left: 90px;
+}
+.bt{
+	background: #F3A002!important;
+
+	border-radius: 30px;
+}
+.bt:focus{
+    box-shadow: none;
+}
+
+
+
+
+
+.rating {
+  font-size: 24px;
+}
+
+.rating > span {
+  display: inline-block;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+.rating > span:not(:last-child) {
+  margin-right: 10px;
+}
+
+.rating > .checked {
+  color: #ffc700;
+  text-shadow: 1px 1px #c59b08;
+}
+
+
+
+
+.search-container{
+  display: flex;
+  align-items: center;
+}
+
+.search-input{
+  border: none;
+  border-bottom: 2px solid #ddd;
+  font-size: 16px;
+  padding: 10px;
+  margin-right: 10px;
+  outline: none;
+  width: 200px;
+}
+
+.search-input:focus{
+  border-bottom-color: #4CAF50;
+}
+
+.search-button{
+  background-color: #4CAF50;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 10px;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.search-button:hover{
+  background-color: #3e8e41;
+}
+
+.fa-search{
+  margin-right: 5px;
+}
+
+
+
+
+
+
+
+
+    .im {
+
+
+  margin: 0 auto;
+}
+    .im:hover {
+  transform: scale(1.8);
+  border-radius:20px;
+}
+
+
+
+    .modal-content{
+    background-color: transparent;
+    border:none;
+    background-repeat: no-repeat;
+    background-size: cover;
+    }
+
+        .mm{
+        background-image:url(https://wallpaperaccess.com/full/7148784.jpg);
+         height: 100vh;
+            width: 100%;
+            background-repeat: no-repeat;
+            background-size: cover;
+            position: absolute;
+
+        }
+    </style>
+
+
+</body>
+
+</html>

@@ -1,0 +1,479 @@
+<!doctype html>
+{% load static %}
+<html class="no-js" lang="zxx">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Continental Resort</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- <link rel="manifest" href="site.webmanifest"> -->
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'img/favicon.png' %}">
+    <!-- Place favicon.ico in the root directory -->
+
+    <!-- CSS here -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
+    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/themify-icons.css' %}">
+    <link rel="stylesheet" href="{% static 'css/nice-select.css' %}">
+    <link rel="stylesheet" href="{% static 'css/flaticon.css' %}">
+    <link rel="stylesheet" href="{% static 'css/gijgo.css' %}">
+    <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+    <link rel="stylesheet" href="{% static 'css/slicknav.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <!-- <link rel="stylesheet" href="css/responsive.css"> -->
+</head>
+
+<body>
+    <!--[if lte IE 9]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+        <![endif]-->
+
+    <!-- header-start -->
+    <header>
+        <div class="header-area ">
+            <div id="sticky-header" class="main-header-area">
+                <div class="container-fluid p-0">
+                    <div class="row align-items-center no-gutters">
+                        <div class="col-xl-6 col-lg-6">
+                            <div class="main-menu  d-none d-lg-block">
+                                <nav>
+                                    <ul id="navigation">
+                                        <li><a href="{% url 'Home_pg' %}">Home</a></li>
+
+                                        <li><a href="{% url 'About_pg' %}">About</a></li>
+                                         <li><a href="#">Services<i class=""></i></a>
+                                            <ul class="submenu">
+                                                 {% for d in key %}
+                                                <li><a href="{% url 'Services_page' cat=d.Category %}">{{d.Category}}</a></li>
+                                            {% endfor %}
+                                            </ul>
+                                        </li>
+                                        <li><a href="{% url 'Contact_pg' %}">Contact</a></li>
+                                        <li><a href="{% url 'Profile_Pg' %}">Profile</a></li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                        <div class="col-xl-2 col-lg-2">
+                            <div class="logo-img">
+                                <a href="{% url 'Home_pg' %}">
+                                    <img src="https://www.hotel-continental.at/wp-content/uploads/sites/128/2020/07/CONTINENTAL001.png" alt="" width="220px">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-xl-4 col-lg-4 d-none d-lg-block">
+                            <div class="book_room">
+                                <div class="socail_links">
+                                    <ul>
+                                         <li>{% if request.session.Email %}
+                                            <a href="#">
+                                               <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="currentColor" class="bi bi-chat-left-fill" viewBox="0 0 16 16">
+  <path d="M2 0a2 2 0 0 0-2 2v12.793a.5.5 0 0 0 .854.353l2.853-2.853A1 1 0 0 1 4.414 12H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+</svg>
+                                            </a>
+                                             {% endif %}
+                                        </li>
+
+                                    </ul>
+                                </div>
+                                <div class="book_btn d-none d-lg-block">
+                                    {% if request.session.Email %}
+                                    <form action="{% url 'Booking_page' %}">
+
+                                    <button type="submit" class="btn btn-outline-warning">Check Availability</button>
+
+                                        </form>
+                                    <form action="{% url 'Logout_Pg' %}">
+                                        <button style="margin-top:-65px;margin-left:170px;" class="btn btn-outline-danger">Logout</button>
+                                    </form>
+
+
+                                        {% else %}
+                                    <form action="{% url 'Registration_pg' %}">
+                                        <button type="submit" class="btn btn-outline-warning">Register</button>
+                                        </form>
+                                    {% endif %}
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="mobile_menu d-block d-lg-none"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- header-end -->
+
+    <!-- bradcam_area_start -->
+    <div class="bradcam_area breadcam_bg_2" style="background-image:url(https://wallpapercave.com/wp/wp3598832.jpg);">
+        <h3>Welcome To Continental</h3>
+        <h4 style="color:White;font-weight:bolder;font-size:20px;">We Serve You Better</h4>
+    </div>
+    <!-- bradcam_area_end -->
+
+    <!-- ================ contact section start ================= -->
+    <div class="about_area">
+        <div class="container">
+            {% for i in z %}
+            <div class="row">
+
+                <div class="col-xl-10 col-lg-10">
+                    <div class="about_thumb2 d-flex">
+
+                        <div class="img_2 gallery zoomin">
+                            <img src="{{i.Image1.url}}" alt="" width="500px" height="450px">
+                        </div>
+                        <div class="img_2 gallery zoomin">
+                            <img src="{{i.Image2.url}}" alt="" width="500px" height="450px">
+                        </div>
+                        <div class="img_2 gallery zoomin">
+                            <img src="{{i.Image3.url}}" alt="" width="500px" height="450px">
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <div class="col-xl-8 col-lg-8">
+                    <div class="about_info">
+                        <div class="section_title mb-20px">
+
+                            <h3>{{i.Product}}</h3>
+                        </div>
+                        <p>{{i.Description}}</p>
+<!--                        <a href="#" class="line-button">Book Now</a>-->
+                    </div>
+                </div>
+            </div>
+            {% if request.session.Email %}
+            <form action="{% url 'Booking_page' %}">
+                <button class="btn btn-outline-info">Book Room To Enjoy</button>
+            </form>
+            {% else %}
+            <form action="{% url 'Registration_pg' %}">
+                <button type="submit" class="btn btn-outline-warning">Register</button>
+            </form>
+            {% endif %}
+
+            {% endfor %}
+        </div>
+    </div>
+
+    <div style="text-align:center;margin-top:-30px;">
+        <h1>Amenities We Provided</h1>
+    </div>
+
+    <div class="row">
+{% for i in y %}
+  <div class="col-lg-4 col-md-3 col-sm-3 col-xs-5">
+    <div class="hovereffect ">
+        <img class="img-responsive" src="{{i.Amenities_image.url}}" alt="" width="300px" height="270px">
+            <div class="overlay">
+                <h2>{{i.Amenities_name}}</h2>
+				<p>
+					<a href="#">{{i.Amenities_des}}</a>
+				</p>
+            </div>
+    </div>
+</div>
+        {% endfor %}
+
+    </div>
+
+
+
+
+
+    <!-- footer -->
+    <footer class="footer" >
+        <div class="footer_top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-3 col-md-6 col-lg-3">
+                        <div class="footer_widget">
+                            <h3 class="footer_title">
+                                address
+                            </h3>
+                            <p class="footer_text" >  200, Green road, Mongla, <br>
+                                    New Yor City USA</p>
+                            <a href="#" class="line-button">Get Direction</a>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-6 col-lg-3">
+                        <div class="footer_widget">
+                            <h3 class="footer_title">
+                                    Reservation
+                            </h3>
+                            <p class="footer_text" >+10 367 267 2678 <br>
+                                    reservation@continental.com</p>
+                        </div>
+                    </div>
+                    <div class="col-xl-2 col-md-6 col-lg-2">
+                        <div class="footer_widget">
+                            <h3 class="footer_title">
+                                    Navigation
+                            </h3>
+                            <ul>
+                                <li><a href="{% url 'Home_pg' %}">Home</a></li>
+                                <li><a href="{% url 'Contact_pg' %}">Contact</a></li>
+                                <li><a href="{% url 'About_pg' %}">About</a></li>
+                                {% if request.session.Email %}
+
+                                <li><a href="{% url 'Profile_Pg' %}">Profile</a></li>
+                            {% else %}
+                                <li><a href="{% url 'Registration_pg' %}">Register</a></li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-md-6 col-lg-4">
+                        <div class="footer_widget">
+                            <h3 class="footer_title">
+                                Newsletter
+                            </h3>
+                            <form action="{% url 'Newsletter_save' %}" class="newsletter_form" method="post">
+                                {% csrf_token %}
+                                <input type="email" placeholder="Enter your mail" name="NewsLetter">
+                                <button type="submit">Sign Up</button>
+                            </form>
+                            <p class="newsletter_text">Subscribe newsletter to get updates</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="copy-right_text">
+            <div class="container">
+                <div class="footer_border"></div>
+                <div class="row">
+                    <div class="col-xl-8 col-md-7 col-lg-9">
+                        <p class="copy_right">
+                                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Mahesh M</a>
+<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        </p>
+                    </div>
+                    <div class="col-xl-4 col-md-5 col-lg-3">
+                        <div class="socail_links">
+                            <ul>
+                                <li>
+                                    <a href="#">
+                                        <i class="fa fa-facebook-square"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="fa fa-twitter"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="fa fa-instagram"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- footer_end -->
+
+
+
+        <!-- JS here -->
+        <script src="{% static 'js/vendor/modernizr-3.5.0.min.js' %}"></script>
+        <script src="{% static 'js/vendor/jquery-1.12.4.min.js' %}"></script>
+        <script src="{% static 'js/popper.min.js' %}"></script>
+        <script src="{% static 'js/bootstrap.min.js' %}"></script>
+        <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+        <script src="{% static 'js/isotope.pkgd.min.js' %}"></script>
+        <script src="{% static 'js/ajax-form.js' %}"></script>
+        <script src="{% static 'js/waypoints.min.js' %}"></script>
+        <script src="{% static 'js/jquery.counterup.min.js' %}"></script>
+        <script src="{% static 'js/imagesloaded.pkgd.min.js' %}"></script>
+        <script src="{% static 'js/scrollIt.js' %}"></script>
+        <script src="{% static 'js/jquery.scrollUp.min.js' %}"></script>
+        <script src="{% static 'js/wow.min.js' %}"></script>
+        <script src="{% static 'js/nice-select.min.js' %}"></script>
+        <script src="{% static 'js/jquery.slicknav.min.js' %}"></script>
+        <script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
+        <script src="{% static 'js/plugins.js' %}"></script>
+        <script src="{% static 'js/gijgo.min.js' %}"></script>
+
+
+        <!--contact js-->
+        <script src="{% static 'js/contact.js' %}"></script>
+        <script src="{% static 'js/jquery.ajaxchimp.min.js' %}"></script>
+        <script src="{% static 'js/jquery.form.js' %}"></script>
+        <script src="{% static 'js/jquery.validate.min.js' %}"></script>
+        <script src="{% static 'js/mail-script.js' %}"></script>
+
+        <script src="{% static 'js/main.js' %}"></script>
+
+    <style>
+
+
+.gallery {
+  --g: 8px;   /* the gap */
+  --s: 400px; /* the size */
+
+  display: grid;
+  border-radius: 25%;
+}
+.gallery > img {
+  grid-area: 1/1;
+  width: 400px;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 10%;
+  transform: translate(var(--_x,0),var(--_y,0));
+  cursor: pointer;
+  z-index: 0;
+  transition: .3s, z-index 0s .3s;
+}
+.gallery img:hover {
+  --_i: 1;
+  z-index: 1;
+  transition: transform .2s, clip-path .3s .2s, z-index 0s;
+}
+.gallery:hover img {
+  transform: translate(0,0);
+}
+.gallery > img:nth-child(1) {
+  clip-path: polygon(50% 50%,calc(50%*var(--_i,0)) calc(120%*var(--_i,0)),0 calc(100%*var(--_i,0)),0 0,100% 0,100% calc(100%*var(--_i,0)),calc(100% - 50%*var(--_i,0)) calc(120%*var(--_i,0)));
+  --_y: calc(-1*var(--g))
+}
+.gallery > img:nth-child(2) {
+  clip-path: polygon(50% 50%,calc(100% - 120%*var(--_i,0)) calc(50%*var(--_i,0)),calc(100% - 100%*var(--_i,0)) 0,100% 0,100% 100%,calc(100% - 100%*var(--_i,0)) 100%,calc(100% - 120%*var(--_i,0)) calc(100% - 50%*var(--_i,0)));
+  --_x: var(--g)
+}
+.gallery > img:nth-child(3) {
+  clip-path: polygon(50% 50%,calc(100% - 50%*var(--_i,0)) calc(100% - 120%*var(--_i,0)),100% calc(100% - 120%*var(--_i,0)),100% 100%,0 100%,0 calc(100% - 100%*var(--_i,0)),calc(50%*var(--_i,0)) calc(100% - 120%*var(--_i,0)));
+  --_y: var(--g)
+}
+.zoomin img {
+      height: 450px;
+      width: 500px;
+      -webkit-transition: all 3s ease;
+      -moz-transition: all 3s ease;
+      -ms-transition: all 3s ease;
+      transition: all 2s ease;
+    }
+    .zoomin img:hover {
+      width: 520px;
+      height: 470px;
+      -webkit-transition: all 3s ease;
+      -moz-transition: all 3s ease;
+      -ms-transition: all 3s ease;
+      transition: all 2s ease;
+    }
+
+##############################
+##############################
+
+
+.hovereffect {
+  width: 100%;
+  height: 100%;
+  float: left;
+  overflow: hidden;
+  position: relative;
+  text-align: center;
+  cursor: default;
+  background: #42b078;
+}
+
+.hovereffect .overlay {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  overflow: hidden;
+  top: 0;
+  left: 0;
+  padding: 50px 20px;
+}
+
+.hovereffect img {
+  display: block;
+  position: relative;
+  max-width: none;
+  width: calc(100% + 20px);
+  -webkit-transition: opacity 0.35s, -webkit-transform 0.35s;
+  transition: opacity 0.35s, transform 0.35s;
+  -webkit-transform: translate3d(-10px,0,0);
+  transform: translate3d(-10px,0,0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.hovereffect:hover img {
+  opacity: 0.4;
+  filter: alpha(opacity=40);
+  -webkit-transform: translate3d(0,0,0);
+  transform: translate3d(0,0,0);
+}
+
+.hovereffect h2 {
+  text-transform: uppercase;
+  color: #fff;
+  text-align: center;
+  position: relative;
+  font-size: 17px;
+  overflow: hidden;
+  padding: 0.5em 0;
+  background-color: transparent;
+}
+
+.hovereffect h2:after {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: #fff;
+  content: '';
+  -webkit-transition: -webkit-transform 0.35s;
+  transition: transform 0.35s;
+  -webkit-transform: translate3d(-100%,0,0);
+  transform: translate3d(-100%,0,0);
+}
+
+.hovereffect:hover h2:after {
+  -webkit-transform: translate3d(0,0,0);
+  transform: translate3d(0,0,0);
+}
+
+.hovereffect a, .hovereffect p {
+  color: #FFF;
+  opacity: 0;
+  filter: alpha(opacity=0);
+  -webkit-transition: opacity 0.35s, -webkit-transform 0.35s;
+  transition: opacity 0.35s, transform 0.35s;
+  -webkit-transform: translate3d(100%,0,0);
+  transform: translate3d(100%,0,0);
+}
+
+.hovereffect:hover a, .hovereffect:hover p {
+  opacity: 1;
+  filter: alpha(opacity=100);
+  -webkit-transform: translate3d(0,0,0);
+  transform: translate3d(0,0,0);
+}
+
+    </style>
+
+
+    </body>
+
+    </html>

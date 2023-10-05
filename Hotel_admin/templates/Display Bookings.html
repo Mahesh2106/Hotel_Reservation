@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+{% extends 'Index_pg.html' %}
+{% block content %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="card-body">
+                    <h4 class="card-title">Bookings Details</h4>
+                    <p class="card-description"><code></code>
+                    </p>
+                    <div class="table-responsive">
+                      <table class="table table-striped">
+                        <thead>
+                          <tr>
+
+                              <th>Booking_ID</th>
+                              <th>Booking_Date</th>
+                              <th>Check_in</th>
+                              <th>Check_in_Time</th>
+                              <th>Check_Out_Time</th>
+                              <th>Check_out</th>
+                              <th>Room_Type</th>
+                                <th>Room Number</th>
+                              <th>Cust_ID</th>
+                              <th>Email</th>
+
+
+                          </tr>
+                        </thead>
+                        <tbody>
+                        {% for i in x %}
+                          <tr>
+
+                            <td> {{i.Booking_ID}} </td>
+
+                            <td> {{i.Booking_Date}} </td>
+                            <td> {{i.Check_in}} </td>
+                            <td> {{i.Check_in_Time}} </td>
+                            <td> {{i.Check_Out_Time}} </td>
+                            <td> {{i.Check_out}} </td>
+                            <td> {{i.Room_Num.Room_Type}}</td>
+                            <td>{{i.Room_Num.Room_Num}}</td>
+                            <td> {{i.Cust_ID.Customer_id}}</td>
+                            <td> {{i.Cust_ID.Email}}</td>
+
+                            <td>
+                              <a href="{% url 'Delete_Bookings_Single' infoid=i.Booking_ID %}">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
+  <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z"/>
+</svg>
+                              </a>
+
+                            </td>
+                          </tr>
+                        {% endfor %}
+
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+{% if messages %}
+      {% for i in messages %}
+           {% if i.tags == 'warning' %}
+               <script>
+                    swal('{{i}}','','warning');
+               </script>
+           {% elif i.tags == 'error' %}
+               <script>
+                    swal('{{i}}','','error');
+               </script>
+           {% else %}
+               <script>
+                    swal('{{i}}','','success');
+               </script>
+           {% endif %}
+        {% endfor %}
+    {% endif %}
+</body>
+</html>
+{% endblock %}

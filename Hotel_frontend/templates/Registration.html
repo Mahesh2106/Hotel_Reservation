@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Document</title>
+</head>
+<body>
+
+
+    <form action="{% url 'Save_Registration' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <div class="container">
+            <h1 class="h1">Sign Up</h1>
+            <input class="in" type="text" placeholder="Customer Name" name="cname" required>
+            <input class="in" type="tel" required placeholder="Mobile eg:1231231234" name="mob" maxlength="10" minlength="10"><br><br>
+
+            <input class="in" type="text" required placeholder="Username eg:anyname;" name="uname" >
+
+            <input class="in" type="email" required placeholder="example@gmail.com" name="email" ><br><br>
+            <textarea name="Address" cols="50" rows="6" class="txt" required placeholder="Your Local Address"></textarea><br><br>
+            <input class="in" type="password" required placeholder="Password" name="pwd" id="Password">
+            <select name="Proof_Type" class="in" required>
+                <option>Select Your Option</option>
+                <option>AADHAR</option>
+
+            </select><br><br>
+            <input type="text" name="Proof_Id" placeholder="Proof Id Number" maxlength="12" class="in" required>
+
+            <input type="file" id="actual-btn" name="IDImage" required hidden/>
+            <label for="actual-btn">Upload ID </label><br><br>
+
+            <button type="submit" class="btn">Register</button>
+            <p style="color: white;font-size: 20px;">Already Have An Account ?</p><a href="{% url 'Login_Page' %}" style="text-decoration: none;color: darkturquoise;font-size: 20px;">Sign In</a>
+            <hr>
+            <h3 style="color: white;">OR Sign Up With</h3>
+
+            <a href=""><img src="https://1000logos.net/wp-content/uploads/2021/04/Facebook-logo.png" alt="" width="65px" height="45px"></a>
+            <a href=""><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Instagram_logo_2016.svg/2048px-Instagram_logo_2016.svg.png" alt="" width="60px" height="40px"></a>
+            <a href=""><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Logo_of_Twitter.svg/512px-Logo_of_Twitter.svg.png?20220821125553" alt="" width="60px" height="40px"></a>
+            <a href=""><img src="https://upload.wikimedia.org/wikipedia/commons/0/08/Pinterest-logo.png" alt="" width="60px" height="40px"></a>
+            <a href=""><img src="https://static.vecteezy.com/system/resources/previews/012/162/809/original/whatsapp-logo-3d-render-free-png.png" alt="" width="60px" height="40px"></a>
+
+        </div>
+    </form>
+
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    {% if messages %}
+      {% for i in messages %}
+           {% if i.tags == 'warning' %}
+               <script>
+                    swal('{{i}}','','warning');
+               </script>
+           {% elif i.tags == 'error' %}
+               <script>
+                    swal('{{i}}','','error');
+               </script>
+           {% else %}
+               <script>
+                    swal('{{i}}','','success');
+               </script>
+           {% endif %}
+        {% endfor %}
+    {% endif %}
+
+    <style>
+        label {
+  background-color: rgb(52, 150, 203);
+  color: white;
+  padding: 0.5rem;
+  font-family: sans-serif;
+  border-radius: 0.3rem;
+  cursor: pointer;
+  margin-top: 1rem;
+  width:350px;
+    height: 30px;
+    border: none;
+            border-radius: 14px;
+
+            padding-left: 10px;
+}
+
+
+
+        .txt{
+            width:400px;
+            height: 60px;
+            border: none;
+            border-radius: 14px;
+            border-color: white !important;
+            padding-left: 10px;
+        }
+        .txt::placeholder{
+            font-style: normal;
+            font-weight: 200px;
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            padding-top: 17px;
+            padding-left: 10px;
+        }
+
+        h3{
+            color: rgb(87, 87, 87);
+        }
+
+        button:hover {
+            background-color: rgb(144, 227, 62);
+
+        }
+
+        button{
+            width: 150px;
+            height:28px;
+            border-radius: 14px;
+            border: none;
+            background-color: rgb(163, 224, 103);
+            color: white;
+
+        }
+
+
+        .in{
+            width:350px;
+            height: 30px;
+            border: none;
+            border-radius: 14px;
+            border-color: white !important;
+            padding-left: 10px;
+
+
+
+        }
+
+        .h1:hover{
+
+            color: rgb(35, 35, 35);
+        }
+
+
+        .h1{
+            font-style: normal;
+            font-size: 40px;
+            padding-top: 30px;
+            color: rgb(76, 76, 76);
+
+        }
+
+
+
+        .container{
+            margin: 400px;
+            backdrop-filter: blur(16px);
+            width: 800px;
+            border-radius: 17px;
+            margin-top: 100px;
+            text-align: center;
+
+
+
+        }
+
+        body{
+            height: 100vh;
+            width: 100%;
+            background-repeat: no-repeat;
+            background-size: cover;
+            position: absolute;
+            background-image:url(https://cdn.wallpapersafari.com/41/41/LEXOky.jpg);
+        }
+    </style>
+
+</body>
+</html>

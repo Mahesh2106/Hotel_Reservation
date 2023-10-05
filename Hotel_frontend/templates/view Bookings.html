@@ -1,0 +1,377 @@
+<!doctype html>
+{% load static %}
+<html class="no-js" lang="zxx">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Continental Resort</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- <link rel="manifest" href="site.webmanifest"> -->
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'img/favicon.png' %}">
+    <!-- Place favicon.ico in the root directory -->
+
+    <!-- CSS here -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
+    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/themify-icons.css' %}">
+    <link rel="stylesheet" href="{% static 'css/nice-select.css' %}">
+    <link rel="stylesheet" href="{% static 'css/flaticon.css' %}">
+    <link rel="stylesheet" href="{% static 'css/gijgo.css' %}">
+    <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+    <link rel="stylesheet" href="{% static 'css/slicknav.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+    <!-- <link rel="stylesheet" href="css/responsive.css"> -->
+</head>
+
+<body>
+    <!--[if lte IE 9]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+        <![endif]-->
+
+    <!-- header-start -->
+    <header>
+        <div class="header-area ">
+            <div id="sticky-header" class="main-header-area">
+                <div class="container-fluid p-0">
+                    <div class="row align-items-center no-gutters">
+                        <div class="col-xl-6 col-lg-6">
+                            <div class="main-menu  d-none d-lg-block">
+                                <nav>
+                                    <ul id="navigation">
+                                        <li><a href="{% url 'Home_pg' %}">Home</a></li>
+                                        <li><a href="{% url 'About_pg' %}">About</a></li>
+                                         <li><a href="#">Services<i class=""></i></a>
+                                            <ul class="submenu">
+                                                 {% for d in key %}
+                                                <li><a href="{% url 'Services_page' cat=d.Category %}">{{d.Category}}</a></li>
+                                            {% endfor %}
+                                            </ul>
+                                        </li>
+
+                                        <li><a href="{% url 'Contact_pg' %}">Contact</a></li>
+                                        <li><a class="active" href="{% url 'Profile_Pg' %}">Profile</a></li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                        <div class="col-xl-2 col-lg-2">
+                            <div class="logo-img">
+                                <a href="{% url 'Home_pg' %}">
+                                    <img src="https://www.hotel-continental.at/wp-content/uploads/sites/128/2020/07/CONTINENTAL001.png" alt="" width="220px">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-xl-4 col-lg-4 d-none d-lg-block">
+                            <div class="book_room">
+                                <div class="socail_links">
+
+                                </div>
+                                <div class="book_btn d-none d-lg-block">
+
+                                    {% if request.session.Email %}
+                                    <form action="{% url 'Booking_page' %}">
+
+                                    <button type="submit" class="btn btn-outline-warning">Check Availability</button>
+
+                                        </form>
+                                    <form action="{% url 'Logout_Pg' %}">
+                                        <button style="margin-top:-65px;margin-left:170px;" class="btn btn-outline-danger">Logout</button>
+                                    </form>
+
+
+                                        {% else %}
+                                    <form action="{% url 'Registration_pg' %}">
+                                        <button type="submit" class="btn btn-outline-warning">Register</button>
+                                        </form>
+                                    {% endif %}
+
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="mobile_menu d-block d-lg-none"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- header-end -->
+
+    <!-- bradcam_area_start -->
+    <div class="bradcam_area breadcam_bg" style="background-image:url(https://wallpaperaccess.com/full/6688225.jpg);">
+        <h3>My Bookings</h3>
+    </div>
+    <!-- bradcam_area_end -->
+<div style="text-align:center;margin-top:50px;"><h1 style="font-weight:bolder;">Booked Details</h1></div>
+<div class="table-responsive" style="margin-top:50px;">
+
+
+  <br>
+
+  <table class="table table-striped" id="roomTable">
+    <thead>
+      <tr>
+        <th>Booking ID</th>
+        <th>Booking Date</th>
+        <th>Check-in Date</th>
+        <th>Check-out Date</th>
+        <th>Check-in Time</th>
+        <th>Check-out Time</th>
+          <th>Room Alloted To</th>
+          <th>Room Num</th>
+          <th>User Email</th>
+          <th>Actions</th>
+
+      </tr>
+    </thead>
+    <tbody>
+      {% for i in x %}
+      <tr>
+        <td>{{ i.Booking_ID }}</td>
+        <td>{{ i.Booking_Date }}</td>
+        <td>{{ i.Check_in }}</td>
+        <td>{{ i.Check_out }}</td>
+        <td>{{ i.Check_in_Time }}</td>
+        <td>{{ i.Check_Out_Time }}</td>
+          <td>{{ i.Room_Num.Room_Type }}</td>
+          <td>{{i.Room_Num.Room_Num}}</td>
+
+        <td>{{ i.Cust_ID.Email }}</td>
+
+          <td>
+              <form action="{% url 'download_booking_pdf' infoid=i.Booking_ID %}">
+                  <button class="btn btn-outline-success">
+                      Download Pdf
+                  </button>
+              </form>
+          </td>
+              <td>
+          <form action="{% url 'Delete_Bookings' infoid=i.Booking_ID %}">
+
+                  <button class="btn btn-outline-danger">
+                      Delete Bookings
+                  </button>
+              </form>
+      </td>
+
+
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+
+
+
+
+<div class="modal fade" id="notification" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Notification</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body"></div>
+            <p>{{pro.Messages}}</p>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+    <!-- footer -->
+    <footer class="footer" >
+        <div class="footer_top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-3 col-md-6 col-lg-3">
+                        <div class="footer_widget">
+                            <h3 class="footer_title">
+                                address
+                            </h3>
+                            <p class="footer_text" >  200, Green road, Mongla, <br>
+                                    New Yor City USA</p>
+
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-6 col-lg-3">
+                        <div class="footer_widget">
+                            <h3 class="footer_title">
+                                    Reservation
+                            </h3>
+                            <p class="footer_text" >+91 789 254 6785<br>
+                                    reservation@continent.com</p>
+                        </div>
+                    </div>
+                    <div class="col-xl-2 col-md-6 col-lg-2">
+                        <div class="footer_widget">
+                            <h3 class="footer_title">
+                                    Navigation
+                            </h3>
+                            <ul>
+                                <li><a href="{% url 'Home_pg' %}">Home</a></li>
+                                <li><a href="{% url 'Contact_pg' %}">Contact</a></li>
+                                <li><a href="{% url 'About_pg' %}">About</a></li>
+                                {% if request.session.Email %}
+
+                                <li><a href="{% url 'Profile_Pg' %}">Profile</a></li>
+                            {% else %}
+                                <li><a href="{% url 'Registration_pg' %}">Register</a></li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-md-6 col-lg-4">
+                        <div class="footer_widget">
+                            <h3 class="footer_title">
+                                Newsletter
+                            </h3>
+                            <form action="{% url 'Newsletter_save' %}" class="newsletter_form" method="post">
+                                {% csrf_token %}
+                                <input type="email" placeholder="Enter your mail" name="NewsLetter">
+                                <button type="submit">Sign Up</button>
+                            </form>
+                            <p class="newsletter_text">Subscribe newsletter to get updates</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="copy-right_text">
+            <div class="container">
+                <div class="footer_border"></div>
+                <div class="row">
+                    <div class="col-xl-8 col-md-7 col-lg-9">
+                        <p class="copy_right">
+                                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Mahesh M</a>
+<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        </p>
+                    </div>
+                    <div class="col-xl-4 col-md-5 col-lg-3">
+                        <div class="socail_links">
+                            <ul>
+                                <li>
+                                    <a href="#">
+                                        <i class="fa fa-facebook-square"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="fa fa-twitter"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="fa fa-instagram"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- footer_end -->
+
+
+
+    <!-- JS here -->
+    <script src="{% static 'js/vendor/modernizr-3.5.0.min.js' %}"></script>
+    <script src="{% static 'js/vendor/jquery-1.12.4.min.js' %}"></script>
+    <script src="{% static 'js/popper.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'js/isotope.pkgd.min.js' %}"></script>
+    <script src="{% static 'js/ajax-form.js' %}"></script>
+    <script src="{% static 'js/waypoints.min.js' %}"></script>
+    <script src="{% static 'js/jquery.counterup.min.js' %}"></script>
+    <script src="{% static 'js/imagesloaded.pkgd.min.js' %}"></script>
+    <script src="{% static 'js/scrollIt.js' %}"></script>
+    <script src="{% static 'js/jquery.scrollUp.min.js' %}"></script>
+    <script src="{% static 'js/wow.min.js' %}"></script>
+    <script src="{% static 'js/nice-select.min.js' %}"></script>
+    <script src="{% static 'js/jquery.slicknav.min.js' %}"></script>
+    <script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
+    <script src="{% static 'js/plugins.js' %}"></script>
+    <script src="{% static 'js/gijgo.min.js' %}"></script>
+
+    <!--contact js-->
+    <script src="{% static 'js/contact.js' %}"></script>
+    <script src="{% static 'js/jquery.ajaxchimp.min.js' %}"></script>
+    <script src="{% static 'js/jquery.form.js' %}"></script>
+    <script src="{% static 'js/jquery.validate.min.js' %}"></script>
+    <script src="{% static 'js/mail-script.js' %}"></script>
+
+    <script src="{% static 'js/main.js' %}"></script>
+    <script type="text/javascript"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.3/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    {% if messages %}
+      {% for i in messages %}
+           {% if i.tags == 'warning' %}
+               <script>
+                    swal('{{i}}','','warning');
+               </script>
+           {% elif i.tags == 'error' %}
+               <script>
+                    swal('{{i}}','','error');
+               </script>
+           {% else %}
+               <script>
+                    swal('{{i}}','','success');
+               </script>
+           {% endif %}
+        {% endfor %}
+    {% endif %}
+
+
+
+
+<script>
+    // get the message icon and count elements from the DOM
+    const messageIcon = document.getElementById('message-icon');
+    const messageCount = document.getElementById('message-count');
+
+    // add an event listener to the message icon element
+    messageIcon.addEventListener('click', event => {
+        // prevent the default click behavior of the link
+        event.preventDefault();
+
+        // update the message count to 0
+        messageCount.textContent = '0';
+
+        // clear the messages from the session
+        const messages = messageIcon.parentElement.dataset.message;
+        const messageArray = messages.split(',');
+        messageArray.length = 0;
+        messageIcon.parentElement.dataset.message = messageArray.join(',');
+    });
+</script>
+
+</body>
+
+</html>

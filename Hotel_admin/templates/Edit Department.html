@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+{% extends 'Index_pg.html' %}
+{% block content %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HOTEL SECTIONS EDITING</title>
+</head>
+<body>
+<div class="card-body">
+                    <h4 class="card-title">HOTEL DETAILS EDITING PAGE</h4>
+                    <form class="forms-sample" action="{% url 'Hotel_feature_update' infoid=x.id %}" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+
+                        <div class="form-group">
+                            <label>Select Your Category</label>
+                            <select name="Category" class="form-control">
+
+                                <option>{{x.Category_name}}</option>
+
+                                {% for i in y %}
+                                <option>{{i.Category}}</option>
+                                {% endfor %}
+
+
+                            </select>
+                        </div>
+
+                      <div class="form-group">
+                        <label for="exampleInputEmail3">Product</label>
+                        <input type="text" class="form-control" id="exampleInputEmail3" placeholder="Product" name="Hotel_Prod" required value="{{x.Product}}">
+                      </div>
+
+                      <div class="form-group">
+                        <label for="exampleInputPassword4">Information</label>
+                        <input type="text" class="form-control" id="exampleInputPassword4" placeholder="Information" name="Hotel_service" required value="{{x.Information}}">
+                      </div>
+                        <div class="form-group">
+                        <label for="exampleInputPassword4">Amount</label>
+                        <input type="text" class="form-control" placeholder="Amount" name="Price" required value="{{x.Amount}}">
+                      </div>
+                        <img src="{{x.Image.url}}" alt="" width="200px" height="200px">
+                      <div class="form-group">
+                          <div class="input-group col-xs-12">
+                          <input type="file" class="form-control file-upload-info" placeholder="Upload Image" name="Img">
+
+                        </div>
+                      </div>
+
+                      <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                      <button class="btn btn-dark">Cancel</button>
+                    </form>
+                  </div>
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    {% if messages %}
+      {% for i in messages %}
+           {% if i.tags == 'warning' %}
+               <script>
+                    swal('{{i}}','','warning');
+               </script>
+           {% elif i.tags == 'error' %}
+               <script>
+                    swal('{{i}}','','error');
+               </script>
+           {% else %}
+               <script>
+                    swal('{{i}}','','success');
+               </script>
+           {% endif %}
+        {% endfor %}
+    {% endif %}
+
+
+
+<style>
+    input[type=file]::file-selector-button {
+  margin-right: 20px;
+  border: none;
+  background: #084cdf;
+  padding: 10px 20px;
+  border-radius: 10px;
+  color: #fff;
+  cursor: pointer;
+  transition: background .2s ease-in-out;
+}
+
+input[type=file]::file-selector-button:hover {
+  background: #0d45a5;
+}
+
+</style>
+</body>
+</html>
+{% endblock %}
